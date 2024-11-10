@@ -68,7 +68,6 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
             ),
             const SizedBox(height: 20),
-            // Campo de input para o nome
             TextField(
               controller: _nameController,
               decoration: const InputDecoration(
@@ -80,7 +79,6 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
             ),
             const SizedBox(height: 20),
-            // Campo de input para o email
             TextField(
               controller: _emailController,
               decoration: const InputDecoration(
@@ -92,7 +90,6 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
             ),
             const SizedBox(height: 20),
-            // Campo de input para a senha
             TextField(
               controller: _passwordController,
               obscureText: !_isPasswordVisible,

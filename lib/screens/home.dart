@@ -9,20 +9,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _userName = ''; // Variável para armazenar o nome do usuário
+  String _userName = '';
 
   @override
   void initState() {
     super.initState();
-    _loadUserName(); // Carrega o nome do usuário ao iniciar a página
+    _loadUserName();
   }
 
-  // Função para carregar o nome do usuário dos SharedPreferences
   Future<void> _loadUserName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _userName = prefs.getString('name') ??
-          'User'; // Padrão "User" se não houver nome salvo
+      _userName = prefs.getString('name') ?? 'User';
     });
   }
 

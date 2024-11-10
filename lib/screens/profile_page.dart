@@ -11,14 +11,15 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   String _userName = '';
   String _userEmail = '';
+  bool _useGreenText = false;
 
   @override
   void initState() {
     super.initState();
     _loadUserData();
+    _loadGreenTextPreference();
   }
 
-  // Função para carregar o nome e e-mail do usuário dos SharedPreferences
   Future<void> _loadUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -27,14 +28,30 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  Future<void> _loadGreenTextPreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _useGreenText = prefs.getBool('useGreenText') ?? false;
+    });
+  }
+
+  Future<void> _saveGreenTextPreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('useGreenText', _useGreenText);
+  }
+
   @override
   Widget build(BuildContext context) {
+    Color textColor = _useGreenText ? Colors.green : Colors.black;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile Page'),
+        title: const Center(
+          child: Text('Profile Page',
+              style: TextStyle(color: Colors.black, fontSize: 20)),
+        ),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.black),
-        titleTextStyle: const TextStyle(color: Colors.black, fontSize: 20),
       ),
       body: Center(
         child: Column(
@@ -42,12 +59,42 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Text(
               'Name: $_userName',
-              style: const TextStyle(fontSize: 18, color: Colors.black),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: textColor,
+              ),
             ),
             const SizedBox(height: 10),
             Text(
               'E-mail: $_userEmail',
-              style: const TextStyle(fontSize: 18, color: Colors.black),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: textColor,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Switch(
+                  value: _useGreenText,
+                  onChanged: (value) {
+                    setState(() {
+                      _useGreenText = value;
+                      _saveGreenTextPreference();
+                    });
+                  },
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    'Mude a cor das strings dessa tela',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

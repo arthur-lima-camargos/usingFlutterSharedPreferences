@@ -29,29 +29,39 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AuthenticationChecker extends StatelessWidget {
+class AuthenticationChecker extends StatefulWidget {
   const AuthenticationChecker({super.key});
 
-  Future<bool> _isUserLoggedIn() async {
+  @override
+  State<AuthenticationChecker> createState() => _AuthenticationCheckerState();
+}
+
+class _AuthenticationCheckerState extends State<AuthenticationChecker> {
+  bool _isLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkLoginStatus();
+  }
+
+  Future<void> _checkLoginStatus() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('email') != null;
+    String? savedEmail = prefs.getString('email');
+    String? savedPassword = prefs.getString('password');
+
+    setState(() {
+      _isLoggedIn = savedEmail != null && savedPassword != null;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
-      future: _isUserLoggedIn(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        }
-        if (snapshot.hasData && snapshot.data == true) {
-          return const MainScreen();
-        } else {
-          return const LoginPage();
-        }
-      },
-    );
+    if (_isLoggedIn) {
+      return const LoginPage();
+    } else {
+      return const LoginPage();
+    }
   }
 }
 

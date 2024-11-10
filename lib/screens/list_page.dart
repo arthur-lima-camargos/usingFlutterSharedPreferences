@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../components/app_bar.dart';
 
 class ListPage extends StatelessWidget {
@@ -8,18 +7,54 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'List Page'),
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            'List Page',
+            style: TextStyle(color: Colors.black, fontSize: 20),
+          ),
+        ),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black),
+      ),
       body: ListView.builder(
         itemCount: 20,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('Item ${index + 1}',
-                style: const TextStyle(color: Colors.black)),
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Clicked on Item ${index + 1}')),
-              );
-            },
+          return Column(
+            children: [
+              ListTile(
+                title: Text(
+                  'Item ${index + 1}',
+                  style: const TextStyle(color: Colors.black),
+                ),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Item ${index + 1}'),
+                        content: Text('Subtítulo do Item ${index + 1}'),
+                        actions: [
+                          OutlinedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            style: OutlinedButton.styleFrom(
+                              side: const BorderSide(color: Colors.black),
+                            ),
+                            child: const Text(
+                              'Fechar',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
+              if (index < 19) const Divider(),
+            ],
           );
         },
       ),
