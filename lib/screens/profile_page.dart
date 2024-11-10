@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../components/app_bar.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -45,13 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
     Color textColor = _useGreenText ? Colors.green : Colors.black;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text('Profile Page', style: TextStyle(color: Colors.black)),
-        ),
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
+      appBar: const CustomAppBar(title: 'Profile Page'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

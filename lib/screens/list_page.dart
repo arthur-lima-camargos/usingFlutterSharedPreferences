@@ -7,16 +7,7 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'List Page',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
+      appBar: const CustomAppBar(title: 'List Page'),
       body: ListView.builder(
         itemCount: 20,
         itemBuilder: (context, index) {

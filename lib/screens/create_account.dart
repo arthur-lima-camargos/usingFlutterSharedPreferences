@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../components/app_bar.dart';
+
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
 
@@ -47,16 +49,7 @@ class _CreateAccountState extends State<CreateAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Create an Account',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.black),
-        automaticallyImplyLeading: true,
-      ),
+      appBar: const CustomAppBar(title: 'Create an Account'),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
