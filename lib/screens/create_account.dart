@@ -53,6 +53,7 @@ class _CreateAccountState extends State<CreateAccount> {
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
+        centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black),
         automaticallyImplyLeading: true,
       ),

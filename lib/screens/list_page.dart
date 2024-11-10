@@ -11,7 +11,7 @@ class ListPage extends StatelessWidget {
         title: const Center(
           child: Text(
             'List Page',
-            style: TextStyle(color: Colors.black, fontSize: 20),
+            style: TextStyle(color: Colors.black),
           ),
         ),
         backgroundColor: Colors.white,
